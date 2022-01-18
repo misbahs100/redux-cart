@@ -1,10 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { removeFromCart } from '../../redux/actions/cartActions';
+import { useDispatch, useSelector } from 'react-redux';
+// import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux/actions/actionCreators';
+// import { removeFromCart } from '../../redux/actions/cartActions';
 
-const Cart = (props) => {
-    console.log(props)
-    const {cart, removeFromCart} = props;
+const Cart = () => {
+    
+    const {cart} = useSelector((state) => state);
+    const {removeFromCart} = bindActionCreators(actionCreators, useDispatch())
+
     return (
         <div>
             <h3>This is cart</h3>
@@ -20,14 +25,15 @@ const Cart = (props) => {
     );
 };
 
-const mapStateToProps =  state => {
-    return {
-        cart: state.cart
-    }
-}
+// const mapStateToProps =  state => {
+//     return {
+//         cart: state.cart
+//     }
+// }
 
-const mapDispatchToProps = {
-    removeFromCart: removeFromCart
-}
+// const mapDispatchToProps = {
+//     removeFromCart: removeFromCart
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default Cart;
+// export default connect(mapStateToProps, mapDispatchToProps)(Cart);
